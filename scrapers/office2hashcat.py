@@ -2682,12 +2682,12 @@ def process_new_office(filename):
             assert(saltValue)
             encryptedVerifierHashInput = node.attrib.get("encryptedVerifierHashInput")
             encryptedVerifierHashValue = node.attrib.get("encryptedVerifierHashValue")
-            encryptedVerifierHashValue = binascii.hexlify(base64.decodestring(encryptedVerifierHashValue.encode()))
+            encryptedVerifierHashValue = binascii.hexlify(base64.decodebytes(encryptedVerifierHashValue.encode()))
 
             sys.stdout.write("$office$*%d*%d*%d*%d*%s*%s*%s\n" % \
                 (version, int(spinCount), int(keyBits), int(saltSize),
-                binascii.hexlify(base64.decodestring(saltValue.encode())).decode("ascii"),
-                binascii.hexlify(base64.decodestring(encryptedVerifierHashInput.encode())).decode("ascii"),
+                binascii.hexlify(base64.decodebytes(saltValue.encode())).decode("ascii"),
+                binascii.hexlify(base64.decodebytes(encryptedVerifierHashInput.encode())).decode("ascii"),
                 encryptedVerifierHashValue[0:64].decode("ascii")))
             return 0
     else:
@@ -2760,12 +2760,12 @@ def xml_metadata_parser(data, filename):
         assert(saltValue)
         encryptedVerifierHashInput = node.attrib.get("encryptedVerifierHashInput")
         encryptedVerifierHashValue = node.attrib.get("encryptedVerifierHashValue")
-        encryptedVerifierHashValue = binascii.hexlify(base64.decodestring(encryptedVerifierHashValue.encode()))
+        encryptedVerifierHashValue = binascii.hexlify(base64.decodebytes(encryptedVerifierHashValue.encode()))
 
         sys.stdout.write("$office$*%d*%d*%d*%d*%s*%s*%s\n" % \
             (version, int(spinCount), int(keyBits), int(saltSize),
-            binascii.hexlify(base64.decodestring(saltValue.encode())).decode("ascii"),
-            binascii.hexlify(base64.decodestring(encryptedVerifierHashInput.encode())).decode("ascii"),
+            binascii.hexlify(base64.decodebytes(saltValue.encode())).decode("ascii"),
+            binascii.hexlify(base64.decodebytes(encryptedVerifierHashInput.encode())).decode("ascii"),
             encryptedVerifierHashValue[0:64].decode("ascii")))
         return 0
 
